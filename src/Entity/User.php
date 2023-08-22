@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UsersRepository;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=UsersRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class Users
+class User
 {
     /**
      * @ORM\Id
@@ -18,7 +20,7 @@ class Users
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=120)
+     * @ORM\Column(type="string", length=255)
      */
     private $alias;
 
@@ -43,10 +45,26 @@ class Users
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Roles::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $role_id;
+    private $role;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="user")
+     */
+    private $trips;
+
+    public function __construct()
+    {
+        $this->trips = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+ 
 
     public function getId(): ?int
     {
@@ -113,15 +131,46 @@ class Users
         return $this;
     }
 
-    public function getRoleId(): ?Roles
+    public function getRole(): ?Role
     {
-        return $this->role_id;
+        return $this->role;
     }
 
-    public function setRoleId(?Roles $role_id): self
+    public function setRole(?Role $role): self
     {
-        $this->role_id = $role_id;
+        $this->role = $role;
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Trip>
+     */
+    public function getTrips(): Collection
+    {
+        return $this->trips;
+    }
+
+    public function addTrip(Trip $trip): self
+    {
+        if (!$this->trips->contains($trip)) {
+            $this->trips[] = $trip;
+            $trip->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrip(Trip $trip): self
+    {
+        if ($this->trips->removeElement($trip)) {
+            // set the owning side to null (unless already changed)
+            if ($trip->getUser() === $this) {
+                $trip->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

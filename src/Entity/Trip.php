@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\TripsRepository;
+use App\Repository\TripRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TripsRepository::class)
+ * @ORM\Entity(repositoryClass=TripRepository::class)
  */
-class Trips
+class Trip
 {
     /**
      * @ORM\Id
@@ -23,7 +25,7 @@ class Trips
     private $destination;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
@@ -46,6 +48,21 @@ class Trips
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="trip")
+     */
+    private $steps;
+
+    public function __construct()
+    {
+        $this->steps = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +137,48 @@ class Trips
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Step>
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): self
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps[] = $step;
+            $step->setTrip($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): self
+    {
+        if ($this->steps->removeElement($step)) {
+            // set the owning side to null (unless already changed)
+            if ($step->getTrip() === $this) {
+                $step->setTrip(null);
+            }
+        }
 
         return $this;
     }

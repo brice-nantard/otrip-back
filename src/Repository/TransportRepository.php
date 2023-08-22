@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Trips;
+use App\Entity\Transport;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Trips>
+ * @extends ServiceEntityRepository<Transport>
  *
- * @method Trips|null find($id, $lockMode = null, $lockVersion = null)
- * @method Trips|null findOneBy(array $criteria, array $orderBy = null)
- * @method Trips[]    findAll()
- * @method Trips[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Transport|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Transport|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Transport[]    findAll()
+ * @method Transport[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TripsRepository extends ServiceEntityRepository
+class TransportRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Trips::class);
+        parent::__construct($registry, Transport::class);
     }
 
-    public function add(Trips $entity, bool $flush = false): void
+    public function add(Transport $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TripsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Trips $entity, bool $flush = false): void
+    public function remove(Transport $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class TripsRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Trips[] Returns an array of Trips objects
+//     * @return Transport[] Returns an array of Transport objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class TripsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Trips
+//    public function findOneBySomeField($value): ?Transport
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')

@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\RolesRepository;
+use App\Repository\RoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=RolesRepository::class)
+ * @ORM\Entity(repositoryClass=RoleRepository::class)
  */
-class Roles
+class Role
 {
     /**
      * @ORM\Id
@@ -20,7 +20,7 @@ class Roles
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=255)
      */
     private $role_name;
 
@@ -35,7 +35,7 @@ class Roles
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=Users::class, mappedBy="role_id")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="role")
      */
     private $users;
 
@@ -43,6 +43,12 @@ class Roles
     {
         $this->users = new ArrayCollection();
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="role_id")
+     */
+
+
 
     public function getId(): ?int
     {
@@ -86,32 +92,33 @@ class Roles
     }
 
     /**
-     * @return Collection<int, Users>
+     * @return Collection<int, User>
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
 
-    public function addUser(Users $user): self
+    public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setRoleId($this);
+            $user->setRole($this);
         }
 
         return $this;
     }
 
-    public function removeUser(Users $user): self
+    public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($user->getRoleId() === $this) {
-                $user->setRoleId(null);
+            if ($user->getRole() === $this) {
+                $user->setRole(null);
             }
         }
 
         return $this;
     }
+    
 }

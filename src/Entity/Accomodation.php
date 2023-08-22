@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\TransportsRepository;
+use App\Repository\AccomodationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TransportsRepository::class)
+ * @ORM\Entity(repositoryClass=AccomodationRepository::class)
  */
-class Transports
+class Accomodation
 {
     /**
      * @ORM\Id
@@ -31,6 +33,16 @@ class Transports
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="accomodation")
+     */
+    private $steps;
+
+    public function __construct()
+    {
+        $this->steps = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,36 @@ class Transports
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Step>
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): self
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps[] = $step;
+            $step->setAccomodation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): self
+    {
+        if ($this->steps->removeElement($step)) {
+            // set the owning side to null (unless already changed)
+            if ($step->getAccomodation() === $this) {
+                $step->setAccomodation(null);
+            }
+        }
 
         return $this;
     }

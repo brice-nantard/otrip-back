@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Accomodations;
+use App\Entity\Accomodation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Accomodations>
+ * @extends ServiceEntityRepository<Accomodation>
  *
- * @method Accomodations|null find($id, $lockMode = null, $lockVersion = null)
- * @method Accomodations|null findOneBy(array $criteria, array $orderBy = null)
- * @method Accomodations[]    findAll()
- * @method Accomodations[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Accomodation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Accomodation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Accomodation[]    findAll()
+ * @method Accomodation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AccomodationsRepository extends ServiceEntityRepository
+class AccomodationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Accomodations::class);
+        parent::__construct($registry, Accomodation::class);
     }
 
-    public function add(Accomodations $entity, bool $flush = false): void
+    public function add(Accomodation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class AccomodationsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Accomodations $entity, bool $flush = false): void
+    public function remove(Accomodation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class AccomodationsRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Accomodations[] Returns an array of Accomodations objects
+//     * @return Accomodation[] Returns an array of Accomodation objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class AccomodationsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Accomodations
+//    public function findOneBySomeField($value): ?Accomodation
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')

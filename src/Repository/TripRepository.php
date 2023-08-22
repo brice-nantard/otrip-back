@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Transports;
+use App\Entity\Trip;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Transports>
+ * @extends ServiceEntityRepository<Trip>
  *
- * @method Transports|null find($id, $lockMode = null, $lockVersion = null)
- * @method Transports|null findOneBy(array $criteria, array $orderBy = null)
- * @method Transports[]    findAll()
- * @method Transports[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Trip|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Trip|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Trip[]    findAll()
+ * @method Trip[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TransportsRepository extends ServiceEntityRepository
+class TripRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Transports::class);
+        parent::__construct($registry, Trip::class);
     }
 
-    public function add(Transports $entity, bool $flush = false): void
+    public function add(Trip $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TransportsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Transports $entity, bool $flush = false): void
+    public function remove(Trip $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class TransportsRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Transports[] Returns an array of Transports objects
+//     * @return Trip[] Returns an array of Trip objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class TransportsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Transports
+//    public function findOneBySomeField($value): ?Trip
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')
