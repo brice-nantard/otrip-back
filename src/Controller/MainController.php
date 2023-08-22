@@ -15,8 +15,6 @@ class MainController extends AbstractController
      */
     public function home()
     {    
-        echo('coucou');
-
         return $this->render('main/home.html.twig', []);
     }
 }
