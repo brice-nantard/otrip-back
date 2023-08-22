@@ -25,21 +25,40 @@
         <h1>PLANIFICATEUR DE VOYAGES</h1>
       </div>
 
-      <div class="header-menu">
-        <ul class="menu-items">
-          <li class="menu-item">
-            <NavLink class="menu-link" href="#">Accueil</NavLink>
-          </li>
-          <li class="menu-item">
-            <NavLink class="menu-link" href="#">Créer un compte</NavLink>
-          </li>
-        </ul>
-        <button type="button" class="menu-btn" onClick="#">Se connecter</button>
+      <nav class="navbar navbar-expand-lg navbar-light ">
+               <div class="container-fluid">
+                  
+                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                       <span class="navbar-toggler-icon"></span>
+                   </button>
+                   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                           <li class="menu-link">
+                               <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                           </li>
+                           <li class="menu-link">
+                               <a class="nav-link" href="#">Se connecter</a>
+                           </li>
+                       </ul>
+                   </div>
+               </div>
+           </nav>
+          </header>
+
+        {% block body %}{% endblock %}
+        
+
+    </body>
+<footer class="footer">
+      <div class="footer-menu">
+        <NavLink class="footer-menu-item" to="/contact">Contact</NavLink>
+        <img class="footer-social-item" src="../../src/assets/facebook.svg" alt="facebook" />
+        <img class="footer-social-item" src="../../src/assets/instagram.svg" alt="instagram" />
+        <img class="footer-social-item" src="../../src/assets/x-twitter.svg" alt="x-twitter" />        
       </div>
 
-      <div class="header--burger-menu">
+</footer>
 
-    
-        {% block body %}{% endblock %}
-    </body>
 </html>
