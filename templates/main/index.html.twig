@@ -16,19 +16,21 @@
             </tr>
         </thead>
         <tbody>
+        {% for user in users %}
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role.id }}</td>
                 <td>
                     <a href="">show</a>
                     <a href="">edit</a>
                 </td>
             </tr>
+        {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
-        </tbody>
+        {% endfor %}
     </table>
 
 
