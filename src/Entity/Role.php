@@ -37,11 +37,11 @@ class Role
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="role")
      */
-    private $users;
+    private $user;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     /**
@@ -94,15 +94,15 @@ class Role
     /**
      * @return Collection<int, User>
      */
-    public function getUsers(): Collection
+    public function getUser(): Collection
     {
-        return $this->users;
+        return $this->user;
     }
 
     public function addUser(User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
             $user->setRole($this);
         }
 
@@ -111,7 +111,7 @@ class Role
 
     public function removeUser(User $user): self
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->user->removeElement($user)) {
             // set the owning side to null (unless already changed)
             if ($user->getRole() === $this) {
                 $user->setRole(null);

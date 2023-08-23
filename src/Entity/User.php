@@ -45,7 +45,7 @@ class User
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="user")
      * @ORM\JoinColumn(nullable=false)
      */
     private $role;
@@ -61,7 +61,7 @@ class User
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="user")
      * @ORM\JoinColumn(nullable=false)
      */
  
