@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
      }
 
       /**
-      * @Route("back/user/{id}", name="app_back_user_show", methods={"GET"})
+      * @Route("back/user/{id<\d+>}", name="app_back_user_show", methods={"GET"})
       */
       public function show(User $user): Response
       {
