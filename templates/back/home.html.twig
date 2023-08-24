@@ -25,8 +25,8 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.role.id }}</td>
                 <td>
-                  <a href="{{ path('app_back_user_show', {'id': user.id}) }}">voir</a>
-                  <a href="{{ path('app_post_delete', {'id': user.id}) }}">supprimer</a>
+                  <a href="{{ path('app_back_users_show', {'id': user.id}) }}">voir</a>
+                  <a href="{{ path('app_users_delete', {'id': user.id}) }}">supprimer</a>
                 </td>
             </tr>
         {% else %}

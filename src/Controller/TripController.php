@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TripController extends AbstractController
 {
     /**
-     * @Route("api/trips", name="app_trip", methods={"GET"} )
+     * @Route("/api/trips", name="app_trip", methods={"GET"} )
      */
     public function getTripsList(TripRepository $tripRepository): JsonResponse
     {
@@ -44,4 +44,5 @@ class TripController extends AbstractController
             ['groups' => '']
         );
     }
+
 }
