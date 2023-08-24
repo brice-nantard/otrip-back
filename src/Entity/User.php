@@ -190,7 +190,6 @@ class User   implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-
      /**
      * @return Collection<int, Trip>
      */
