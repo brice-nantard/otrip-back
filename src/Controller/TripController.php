@@ -43,6 +43,7 @@ class TripController extends AbstractController
             [],
             ['groups' => '']
         );
+        
     }
 
 }
