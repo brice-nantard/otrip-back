@@ -45,6 +45,10 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/back, roles: ROLE_MANAGER }
+        - { path: ^/api, roles: PUBLIC_ACCESS } # indique que l'accès a la route /api/login est publique
+        # - { path: ^/api/login, roles: PUBLIC_ACCESS } # indique que l'accès a la route /api/login est publique
+        - { path: ^/api/secure,       roles: IS_AUTHENTICATED_FULLY } # indique que l'acces a tout ce qui commence par /api nécéssite une authentification
 
 when@test:
     security:
