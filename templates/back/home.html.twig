@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}O'Trip planificateur de voyages{% endblock %}
+
+{% block body %}
+
+    <h1>Gestion des utilisateurs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+              
+                <td>{{ user.alias }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role.id }}</td>
+                <td>
+                  <a href="{{ path('app_back_user_show', {'id': user.id}) }}">voir</a>
+                  <a href="{{ path('app_post_delete', {'id': user.id}) }}">supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
