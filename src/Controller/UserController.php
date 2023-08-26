@@ -16,16 +16,16 @@ use Symfony\Component\HttpFoundation\Request;
      /**
       * Homepage
       * 
-      * @Route("/back/user", name="app_back_user", methods={"GET"})
+      * @Route("/back/users", name="app_back_users", methods={"GET"})
       */
-    public function home(UserRepository $userRepository):Response
+    public function list(UserRepository $userRepository):Response
      {
         return $this->render('back/home.html.twig', 
         ['users' => $userRepository->findAll(),]);
      }
 
       /**
-      * @Route("back/user/{id}", name="app_back_user_show", methods={"GET"})
+      * @Route("/back/users/{id<\d+>}", name="app_back_users_show", methods={"GET"})
       */
       public function show(User $user): Response
       {
@@ -37,20 +37,18 @@ use Symfony\Component\HttpFoundation\Request;
       /**
       * Delete
       * 
-      * @Route("/back/user/delete/{id<\d+>}", name="app_post_delete")
+      * @Route("/back/users/delete/{id<\d+>}", name="app_users_delete")
       */
      public function delete(UserRepository $userRepository, $id, ManagerRegistry $doctrine)
      {
         
          $user = $userRepository->find($id);
 
-         
          $entityManager = $doctrine->getManager();
         
          $entityManager->remove($user);
-        var_dump($user);
          $entityManager->flush();
-         return $this->redirectToRoute('app_back_user');
+         return $this->redirectToRoute('app_back_users');
      }
  }
 
