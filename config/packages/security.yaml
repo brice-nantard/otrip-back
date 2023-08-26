@@ -24,13 +24,13 @@ security:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        #api:
-        #    pattern: ^/api
-        #    stateless: true 
-        #    jwt: ~        
-        # main:
-        #   lazy: true
-        #    provider: app_user_provider
+        api:
+            pattern: ^/api
+            stateless: true 
+            jwt: ~        
+        main:
+            lazy: true
+            provider: app_user_provider
         #    logout:
         #       path: app_logout
 
