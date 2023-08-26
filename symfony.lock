@@ -1,4 +1,5 @@
 {
+
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -76,6 +77,7 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+
     "symfony/apache-pack": {
         "version": "1.0",
         "recipe": {
@@ -100,6 +102,7 @@
             "bin/console"
         ]
     },
+
     "symfony/debug-bundle": {
         "version": "5.4",
         "recipe": {
@@ -112,7 +115,10 @@
             "config/packages/debug.yaml"
         ]
     },
-    "symfony/flex": {
+
+    "
+    
+    ": {
         "version": "1.20",
         "recipe": {
             "repo": "github.com/symfony/recipes",
@@ -143,6 +149,7 @@
             "src/Kernel.php"
         ]
     },
+
     "symfony/mailer": {
         "version": "5.4",
         "recipe": {
@@ -215,6 +222,7 @@
             "tests/bootstrap.php"
         ]
     },
+
     "symfony/routing": {
         "version": "5.4",
         "recipe": {
@@ -228,6 +236,7 @@
             "config/routes.yaml"
         ]
     },
+
     "symfony/security-bundle": {
         "version": "5.4",
         "recipe": {
@@ -253,6 +262,7 @@
             "translations/.gitignore"
         ]
     },
+
     "symfony/twig-bundle": {
         "version": "5.4",
         "recipe": {
@@ -266,6 +276,7 @@
             "templates/base.html.twig"
         ]
     },
+
     "symfony/validator": {
         "version": "5.4",
         "recipe": {
@@ -278,6 +289,7 @@
             "config/packages/validator.yaml"
         ]
     },
+
     "symfony/web-profiler-bundle": {
         "version": "5.4",
         "recipe": {
@@ -290,6 +302,7 @@
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
         ]
+
     },
     "symfony/webapp-pack": {
         "version": "1.2",
@@ -305,5 +318,6 @@
     },
     "twig/extra-bundle": {
         "version": "v3.7.0"
+
     }
 }
