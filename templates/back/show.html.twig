@@ -1,31 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Utilisateur{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Pseudo</th>
-                <td>{{ user.alias }}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles|join (', ')}}</td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <ul class="list-group justify-content-center">
+  <li class="list-group-item " ><strong>Pseudo : </strong> {{ user.alias }}</li>
+  <li class="list-group-item"> <strong> Id : </strong> {{ user.id }} </li>
+  <li class="list-group-item"> <strong> Email : </strong> {{ user.email }}</li>
+  <li class="list-group-item"> <strong>Roles : </strong> {{ user.roles|join (', ')}}</li>
 
-    <a href="{{ path('app_back_users') }}">back to list</a>
+
+    <a href="{{ path('app_back_users') }}"  class="btn btn-secondary">Retour</a>
+</ul>
+
 {% endblock %}
