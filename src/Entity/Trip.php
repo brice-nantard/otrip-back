@@ -6,6 +6,7 @@ use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
@@ -21,21 +22,25 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=120)
+     * @Groups({"get_collection"})
      */
     private $destination;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"get_collection"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"get_collection"})
      */
     private $start_date;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"get_collection"})
      */
     private $end_date;
 
@@ -56,6 +61,7 @@ class Trip
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="trip")
+     * @Groups({"get_collection"})
      */
     private $steps;
 

@@ -39,6 +39,34 @@ class TripRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Get one random trip avec DQL
+     *
+     */
+    public function findOneRandomTrip()
+    {
+        //$entityManager = $this->getEntityManager();
+        //$query = $entityManager->createQuery(
+        //    'SELECT t
+        //    FROM App\Entity\Trip AS t
+        //    ORDER BY RAND()'
+        //);
+        //return $query->getResult();
+
+        // On créer la requete SQL qui va selectionner un film au hasard dans la base de donnée
+        $sql = "SELECT *
+        FROM `trip`
+        ORDER BY RAND()
+        LIMIT 1";
+
+     
+        $conn = $this->getEntityManager()->getConnection();
+      
+        $result = $conn->executeQuery($sql)->fetchAssociative();
+
+        return ($result);
+    }
+
 //    /**
 //     * @return Trip[] Returns an array of Trip objects
 //     */
