@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
       * 
       * @Route("/back/users", name="app_back_users", methods={"GET"})
       */
-    public function home(UserRepository $userRepository):Response
+    public function list(UserRepository $userRepository):Response
      {
         return $this->render('back/home.html.twig', 
         ['users' => $userRepository->findAll(),]);
@@ -44,11 +44,9 @@ use Symfony\Component\HttpFoundation\Request;
         
          $user = $userRepository->find($id);
 
-         
          $entityManager = $doctrine->getManager();
         
          $entityManager->remove($user);
-        var_dump($user);
          $entityManager->flush();
          return $this->redirectToRoute('app_back_users');
      }
