@@ -20,9 +20,9 @@
                  'label' => 'Rôles',
                  'choices' => [
                      
-                     'Utilisateur' => ["ROLE_USER"]
+                     'Utilisateur' => 'ROLE_USER'
                      ,
-                     'Administrateur' => ["ROLE_ADMIN"]
+                     'Administrateur' => 'ROLE_ADMIN'
                      ,
                  ],
                  // choix multiple

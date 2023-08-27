@@ -25,11 +25,9 @@ class TripController extends AbstractController
             ['groups' => 'get_collection']
         );
     }
-
-
     /**
-      * Retourne un film au hasard
-      * @Route("/api/trips/random", name="api_movies_get_item_random", methods={"GET"})
+      * 
+      * @Route("/api/trips/random", name="api_trips_get_item_random", methods={"GET"})
       */
 
     public function getItemRandom(TripRepository $tripRepository)
@@ -45,5 +43,6 @@ class TripController extends AbstractController
         );
         
     }
+    
 
 }
