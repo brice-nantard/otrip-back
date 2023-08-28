@@ -56,22 +56,50 @@ class TripController extends AbstractController
      */
     public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry)
     {
-        // Ici on récupère le contenu JSON de la requête
+       
         $jsonContent = $request->getContent();
 
-        // Ici on déserialise (convertit) le JSON intercépté en objet PHP donc => en entité Movie
+       
         $trip = $serializer->deserialize($jsonContent, Trip::class, 'json');
-        // Maintenant $movie c'est une entité Movie et on va la sauvegarder dans la bdd
+        
         $entityManager = $managerRegistry->getManager();
         $entityManager->persist($trip);
         $entityManager->flush();
      
 
-        //On retourne la réponse adapté (le code attendu quand un post a bien fonctionné c'est le code 201)
+       
         return $this->json(
             $trip,
             201,
             [],
+            ['groups' => 'get_collection']
+        );
+    }
+
+    /**
+     * 
+     * @Route("/api/trips/{id}", name="api_movies_put", methods={"PUT"})
+     */
+    public function editItem(Request $request, Trip $trip = null, SerializerInterface $serializer, TripRepository $tripRepository)
+    {
+ 
+        if ($trip == null) {
+            return $this->json(
+                'Erreur => Voyage non trouvé',
+                400,
+                [''],
+                ['groups' => '']
+            );
+        }
+     
+        $jsonContent = $request->getContent();
+        
+        $serializer->deserialize($jsonContent, Trip::class, 'json', ['object_to_populate' => $trip]);
+        $tripRepository->add($trip, true);
+        return $this->json(
+            $trip,
+            200,
+            [''],
             ['groups' => 'get_collection']
         );
     }
