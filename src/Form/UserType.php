@@ -38,7 +38,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
                       'first_options' => array('label' => 'Mot de passe'),
                       'second_options' => array('label' => 'Confirmation du mot de passe'),
                   ))
-                  ->add('submit', SubmitType::class, ['label' => 'Envoyer', 'attr' => ['class' => 'btn-primary btn-block']]);
+                  ->add('Enregistrer', SubmitType::class, ['label' => 'Envoyer', 'attr' => ['class' => 'btn-primary btn-block']]);
 
                 }
 
