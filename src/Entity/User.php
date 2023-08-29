@@ -51,7 +51,7 @@ class User   implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $created_at;
 
@@ -121,14 +121,13 @@ class User   implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
+        
     }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 

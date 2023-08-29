@@ -17,34 +17,38 @@
     </head>
     <body>
         <header class="header">
-      <div class="header-logo">
-        <img src="../../src/assets/logo_otrip.png" alt="logo-otrip" />
-      </div>
 
-      <div class="header-title">
-        <h1>PLANIFICATEUR DE VOYAGES</h1>
-      </div>
+            <div class="header-logo">
+              <img class="otrip" src="{{asset('../public/images/logo_otrip.png') }}" alt="logo-otrip" />
+              <img class="mobile" src="{{asset('../public/images/logo-mobile.png') }}" alt="logo-otrip" />
+            </div>
+        
+            <div class="header-title">
+              <h1>PLANIFICATEUR DE VOYAGES</h1>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light ">
+                <div class="container-fluid">
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-      <nav class="navbar navbar-expand-lg navbar-light ">
-               <div class="container-fluid">
-                  
-                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                       <span class="navbar-toggler-icon"></span>
-                   </button>
-                   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="menu-link">
+                                <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                            </li>
+                            <li class="menu-link">
+                                <a class="nav-link" href="#">Se connecter</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
+            <div class="header--burger-menu">
+            </div>
 
-                           <li class="menu-link">
-                               <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-                           </li>
-                           <li class="menu-link">
-                               <a class="nav-link" href="#">Se connecter</a>
-                           </li>
-                       </ul>
-                   </div>
-               </div>
-           </nav>
           </header>
 
         {% block body %}{% endblock %}
