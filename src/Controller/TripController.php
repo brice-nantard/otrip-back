@@ -48,9 +48,6 @@ class TripController extends AbstractController
         );
 
 
-=========
-        
->>>>>>>>> Temporary merge branch 2
     }
 
     /**
