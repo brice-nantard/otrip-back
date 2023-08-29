@@ -50,7 +50,7 @@ class StepController extends AbstractController
     /**
      * Route qui va nous permettre de rajouter un film à l'aide d'une requête HTTP en methode POST
      * 
-     * @Route("/api/create/step", name="api_step_post", methods={"POST"})
+     * @Route("/api/trip/{id}/step", name="api_step_post", methods={"POST"})
      */
     public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry)
     {

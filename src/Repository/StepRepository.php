@@ -44,10 +44,10 @@ class StepRepository extends ServiceEntityRepository
     {
         $sql = "SELECT *  
         FROM `step`
-        WHERE `trip_id`= ";
+        WHERE `trip_id`= 2";
 
         $conn = $this->getEntityManager()->getConnection();
-        $result = $conn->executeQuery($sql)->fetchAssociative();
+        $result = $conn->executeQuery($sql)->fetchAllAssociative();
 
         return ($result);
     }
