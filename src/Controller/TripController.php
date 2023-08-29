@@ -105,4 +105,30 @@ class TripController extends AbstractController
             ['groups' => 'get_collection']
         );
     }
+
+    /**
+     * Route qui va nous permettre de supprimer un voyage
+     * 
+     * @Route("/api/trip/{id}", name="api_movies_put", methods={"DELETE"})
+     */
+    public function deleteItem(TripRepository $tripRepository, Trip $trip = null)
+    {
+        // Si le voyage qu'on veut supprimer n'existe pas
+        if ($trip === null) {
+            return $this->json(
+                'Erreur => Film non trouvé',
+                400,
+                [''],
+                ['groups' => '']
+            );
+        }
+        // Ci dessous je supprime le voyage
+        $tripRepository->remove($trip, true);
+        return $this->json(
+            $trip,
+            400,
+            [''],
+            ['groups' => 'get_collection']
+        );
+    }
 }
