@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Trip;
 use App\Repository\TripRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +33,7 @@ class TripController extends AbstractController
 
 
     /**
-      * Retourne un film au hasard
+      * Retourne un voyage au hasard
       * @Route("/api/trips/random", name="api_movies_get_item_random", methods={"GET"})
       */
 
@@ -77,25 +78,25 @@ class TripController extends AbstractController
         );
     }
 
+   
     /**
-     * Route qui va nous permettre de modifier un voyage 
      * 
-     * @Route("/api/trip/{id}/edit", name="api_trip_put", methods={"PUT"})
+     * @Route("/api/trip/{id}", name="api_trip_put", methods={"PUT"})
      */
     public function editItem(Request $request, Trip $trip = null, SerializerInterface $serializer, TripRepository $tripRepository)
     {
+ 
         if ($trip == null) {
             return $this->json(
-                'Error',
+                'Erreur => Voyage non trouvé',
                 400,
                 [''],
                 ['groups' => '']
             );
         }
-        // Ici on stock le json envoyé dans la requête dans $jsonContent
+     
         $jsonContent = $request->getContent();
-        // Ici je déserialise le json intercepté ($jsonContent) et je modfie mon entité $movie avec ce json deserialisé grace a l'option object to populate
-        // ['object_to_populate' => $movie] me permet de dire que je veux que $movie (le film courant que je veux modifier) aura les valeurs qui ont été renseignées dans la requêtte HTTP (le title, duréer, etc)
+        
         $serializer->deserialize($jsonContent, Trip::class, 'json', ['object_to_populate' => $trip]);
         $tripRepository->add($trip, true);
         return $this->json(
@@ -106,29 +107,17 @@ class TripController extends AbstractController
         );
     }
 
+    
     /**
-     * Route qui va nous permettre de supprimer un voyage
-     * 
-     * @Route("/api/trip/{id}", name="api_movies_put", methods={"DELETE"})
+     *
+     * @Route("/api/trip/{id}", name="api_trip_delete", methods={"DELETE"})
      */
-    public function deleteItem(TripRepository $tripRepository, Trip $trip = null)
-    {
-        // Si le voyage qu'on veut supprimer n'existe pas
-        if ($trip === null) {
-            return $this->json(
-                'Erreur => Film non trouvé',
-                400,
-                [''],
-                ['groups' => '']
-            );
-        }
-        // Ci dessous je supprime le voyage
-        $tripRepository->remove($trip, true);
-        return $this->json(
-            $trip,
-            400,
-            [''],
-            ['groups' => 'get_collection']
-        );
-    }
+
+     public function deleteItem(Trip $trip, EntityManagerInterface $em): JsonResponse
+     {
+         $em->remove($trip);
+         $em->flush();
+ 
+         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+     }
 }

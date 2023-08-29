@@ -45,24 +45,16 @@ class TripRepository extends ServiceEntityRepository
      */
     public function findOneRandomTrip()
     {
-        //$entityManager = $this->getEntityManager();
-        //$query = $entityManager->createQuery(
-        //    'SELECT t
-        //    FROM App\Entity\Trip AS t
-        //    ORDER BY RAND()'
-        //);
-        //return $query->getResult();
-
         // On créer la requete SQL qui va selectionner un film au hasard dans la base de donnée
-        $sql = "SELECT *
+        $sql = " SELECT *
         FROM `trip`
         ORDER BY RAND ()
-        LIMIT 2 ";
+        LIMIT 4 ";
 
      
         $conn = $this->getEntityManager()->getConnection();
       
-        $result = $conn->executeQuery($sql)->fetchAssociative();
+        $result = $conn->executeQuery($sql)->fetchAllAssociative();
 
         return ($result);
     }
