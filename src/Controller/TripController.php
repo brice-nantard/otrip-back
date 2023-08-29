@@ -48,6 +48,7 @@ class TripController extends AbstractController
         );
 
 
+
     }
 
     /**
@@ -75,7 +76,9 @@ class TripController extends AbstractController
             [],
             ['groups' => 'get_collection']
         );
+
     }
+    
 
     /**
      *

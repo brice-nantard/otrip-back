@@ -3,7 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\StepRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
@@ -18,19 +22,22 @@ class Step
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=120)
+     * @Groups({"get_collection"})
      */
     private $place;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"get_collection"})
      */
     private $start_date;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"get_collection"})
      */
-    private $end_date;
+    private $end_start;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -39,6 +46,7 @@ class Step
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"get_collection"})
      */
     private $picture;
 
@@ -53,6 +61,25 @@ class Step
     private $updated_at;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Accomodation::class, inversedBy="steps")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"get_collection"})
+     */
+    private $accomodation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Transport::class, inversedBy="steps")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"get_collection"})
+     */
+    private $transport;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="steps")
+     * @Groups({"get_collection"})
+     */
+    private $trip;
+
      * @ORM\ManyToOne(targetEntity=Transport::class, inversedBy="steps")
      */
     private $transport;
@@ -102,6 +129,15 @@ class Step
 
         return $this;
     }
+
+    public function getEndStart(): ?\DateTimeInterface
+    {
+        return $this->end_start;
+    }
+
+    public function setEndStart(\DateTimeInterface $end_start): self
+    {
+        $this->end_start = $end_start;
 
     public function getEndDate(): ?\DateTimeInterface
     {
@@ -163,6 +199,15 @@ class Step
         return $this;
     }
 
+    public function getAccomodation(): ?Accomodation
+    {
+        return $this->accomodation;
+    }
+
+    public function setAccomodation(?Accomodation $accomodation): self
+    {
+        $this->accomodation = $accomodation;
+
     public function getTransport(): ?Transport
     {
         return $this->transport;
@@ -174,6 +219,15 @@ class Step
 
         return $this;
     }
+
+    public function getTransport(): ?Transport
+    {
+        return $this->transport;
+    }
+
+    public function setTransport(?Transport $transport): self
+    {
+        $this->transport = $transport;
 
     public function getAccomodation(): ?Accomodation
     {

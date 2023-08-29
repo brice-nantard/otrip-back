@@ -5,8 +5,8 @@ namespace App\Entity;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
@@ -17,11 +17,12 @@ class Trip
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=120)
      * @Groups({"get_collection"})
      */
     private $destination;
@@ -56,13 +57,12 @@ class Trip
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
-     * 
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="trip")
-     * @Groups({"get_collection"})
+     * 
      */
     private $steps;
 

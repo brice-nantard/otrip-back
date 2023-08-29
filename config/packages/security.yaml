@@ -6,17 +6,21 @@ security:
         App\Entity\User:
             algorithm: auto
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
     providers:
+
+
+        # used to reload user from session & other features (e.g. switch_user)
+
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
-            
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         login:
             pattern: ^/api/login
             stateless: true
@@ -24,16 +28,17 @@ security:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
         #api:
         #    pattern: ^/api
         #    stateless: true 
         #    jwt: ~        
+
         main:
             lazy: true
             provider: app_user_provider
             logout:
                path: app_logout
-
 
 
             # activate different ways to authenticate
@@ -45,6 +50,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+
             - { path: ^/back, roles: ROLE_ADMIN }
             - { path: ^/, roles: PUBLIC_ACCESS}
             - { path: ^/api/login, roles: PUBLIC_ACCESS }

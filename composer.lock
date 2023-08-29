@@ -4,7 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd2e90c704b5966e1f41bcfcc2884794",
+
+    "content-hash": "5ac8bab553bdd9be4237f953383f5a77",
+
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2020,7 +2022,71 @@
             "time": "2016-12-05T07:27:31+00:00"
         },
         {
-            "name": "phpdocumentor/reflection-common",
+
+            "name": "nelmio/cors-bundle",
+            "version": "2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelmio/NelmioCorsBundle.git",
+                "reference": "185d2c0ae50a3f0b628790170164d5f1c5b7c281"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelmio/NelmioCorsBundle/zipball/185d2c0ae50a3f0b628790170164d5f1c5b7c281",
+                "reference": "185d2c0ae50a3f0b628790170164d5f1c5b7c281",
+                "shasum": ""
+            },
+            "require": {
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
+                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "symfony/phpunit-bridge": "^4.4 || ^5.4 || ^6.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nelmio\\CorsBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nelmio",
+                    "homepage": "http://nelm.io"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/nelmio/NelmioCorsBundle/contributors"
+                }
+            ],
+            "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Symfony application",
+            "keywords": [
+                "api",
+                "cors",
+                "crossdomain"
+            ],
+            "support": {
+                "issues": "https://github.com/nelmio/NelmioCorsBundle/issues",
+                "source": "https://github.com/nelmio/NelmioCorsBundle/tree/2.3.1"
+            },
+            "time": "2023-02-16T08:49:29+00:00"
+        },
+        {
+
+           "name": "phpdocumentor/reflection-common",
             "version": "2.2.0",
             "source": {
                 "type": "git",
@@ -9037,16 +9103,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.10",
+            "version": "9.6.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a6d351645c3fe5a30f5e86be6577d946af65a328"
+                "reference": "810500e92855eba8a7a5319ae913be2da6f957b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a6d351645c3fe5a30f5e86be6577d946af65a328",
-                "reference": "a6d351645c3fe5a30f5e86be6577d946af65a328",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/810500e92855eba8a7a5319ae913be2da6f957b0",
+                "reference": "810500e92855eba8a7a5319ae913be2da6f957b0",
                 "shasum": ""
             },
             "require": {
@@ -9120,7 +9186,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.10"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.11"
             },
             "funding": [
                 {
@@ -9136,7 +9202,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-10T04:04:23+00:00"
+            "time": "2023-08-19T07:10:56+00:00"
         },
         {
             "name": "sebastian/cli-parser",

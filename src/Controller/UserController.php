@@ -65,18 +65,20 @@
       /**
       * Delete
       * 
-      * @Route("/back/users/delete/{id<\d+>}", name="app_users_delete")
+      * @Route("/back/user/{id<\d+>}", name="app_post_delete")
       */
      public function delete(UserRepository $userRepository, $id, ManagerRegistry $doctrine)
      {
         
          $user = $userRepository->find($id);
 
+         
          $entityManager = $doctrine->getManager();
         
          $entityManager->remove($user);
+        var_dump($user);
          $entityManager->flush();
          return $this->redirectToRoute('app_back_users');
      }
- }
+}
 
