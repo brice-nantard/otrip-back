@@ -79,7 +79,8 @@ class Step
      * @Groups({"get_collection"})
      */
     private $trip;
-
+    /**
+     * 
      * @ORM\ManyToOne(targetEntity=Transport::class, inversedBy="steps")
      */
     private $transport;
