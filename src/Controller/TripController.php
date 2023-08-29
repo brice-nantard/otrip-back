@@ -48,6 +48,9 @@ class TripController extends AbstractController
         );
 
 
+=========
+        
+>>>>>>>>> Temporary merge branch 2
     }
 
     /**
@@ -75,7 +78,9 @@ class TripController extends AbstractController
             [],
             ['groups' => 'get_collection']
         );
+
     }
+    
 
     /**
      *

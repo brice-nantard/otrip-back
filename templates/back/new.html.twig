@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
  {% block title %}Gestion des utilisateurs.{% endblock %}
 
  {% block body %}
@@ -8,4 +9,5 @@
      {{ include('back/_form.html.twig') }}
 
      <a href="{{ path('app_back_users') }}">Retourner à la liste des utilisateurs. </a>
+
  {% endblock %}
