@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Step;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Trip;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 
 /**
  * @extends ServiceEntityRepository<Step>
@@ -38,6 +40,36 @@ class StepRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findStepsFromTrip()
+    {
+        $sql = "SELECT *  
+        FROM `step`
+        WHERE `trip_id`= ";
+
+        $conn = $this->getEntityManager()->getConnection();
+        $result = $conn->executeQuery($sql)->fetchAssociative();
+
+        return ($result);
+    }
+
+    /**
+     * Get castings for a given movie
+     */
+    //public function findAllTest(Trip $trip)
+    //{
+    //    $entityManager = $this->getEntityManager();
+
+    //    $query = $entityManager->createQuery(
+    //        'SELECT s, 
+    //        FROM App\Entity\Step AS s
+    //        WHERE s.trip = :trip'
+    //    )->setParameter('trip', $trip);
+//
+    //    // returns an array of Step objects
+    //    return $query->getResult();
+    //}
+
 
 //    /**
 //     * @return Step[] Returns an array of Step objects

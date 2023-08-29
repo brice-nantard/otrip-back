@@ -35,7 +35,7 @@ class Accomodation
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="accomodation")
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="accomodation", orphanRemoval=true)
      */
     private $steps;
 

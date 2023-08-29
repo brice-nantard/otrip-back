@@ -48,8 +48,6 @@ class Role
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="role_id")
      */
 
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -121,4 +119,4 @@ class Role
         return $this;
     }
     
-}
+}       
