@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\RoleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RoleRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=RoleRepository::class)
@@ -34,24 +35,6 @@ class Role
      */
     private $updated_at;
 
-    /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="role")
-     */
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-    }
-
-    /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="role_id")
-     */
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getRoleName(): ?string
     {
@@ -89,34 +72,10 @@ class Role
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUser(): Collection
+    public function getId(): ?int
     {
-        return $this->user;
+        return $this->id;
     }
 
-    public function addUser(User $user): self
-    {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-            $user->setRole($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->user->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getRole() === $this) {
-                $user->setRole(null);
-            }
-        }
-
-        return $this;
-    }
     
 }       
