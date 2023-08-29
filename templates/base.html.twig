@@ -2,7 +2,6 @@
 <html>
     <head>
         <meta charset="UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
@@ -10,15 +9,15 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-     <!-- Our custom CSS -->
-     <link rel="stylesheet" href="{{asset('../public/css/otrip.css') }}">
 
-        <title>{% block title %}Planificateur de voyages !{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/otrip.css') }}">
+
+        <title>{% block title %}Welcome!{% endblock %}</title>
         
     </head>
     <body>
-       
         <header class="header">
+
             <div class="header-logo">
               <img class="otrip" src="{{asset('../public/images/logo_otrip.png') }}" alt="logo-otrip" />
               <img class="mobile" src="{{asset('../public/images/logo-mobile.png') }}" alt="logo-otrip" />
@@ -49,9 +48,21 @@
 
             <div class="header--burger-menu">
             </div>
+
           </header>
-          {% block body %}{% endblock %}
+
+        {% block body %}{% endblock %}
+        
+
     </body>
+<footer class="footer">
+      <div class="footer-menu">
+        <NavLink class="footer-menu-item" to="/contact">Contact</NavLink>
+        <img class="footer-social-item" src="../../src/assets/facebook.svg" alt="facebook" />
+        <img class="footer-social-item" src="../../src/assets/instagram.svg" alt="instagram" />
+        <img class="footer-social-item" src="../../src/assets/x-twitter.svg" alt="x-twitter" />        
+      </div>
+
+</footer>
+
 </html>
-
-

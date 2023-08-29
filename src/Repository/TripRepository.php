@@ -39,6 +39,7 @@ class TripRepository extends ServiceEntityRepository
         }
     }
 
+
     public function findOneRandomTrip()
     {
         $sql = "SELECT * 
@@ -74,6 +75,7 @@ class TripRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
 
     
 }

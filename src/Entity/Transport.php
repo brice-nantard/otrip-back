@@ -35,7 +35,7 @@ class Transport
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="transport")
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="transport", orphanRemoval=true)
      */
     private $steps;
 
@@ -43,11 +43,6 @@ class Transport
     {
         $this->steps = new ArrayCollection();
     }
-
-    /**
-     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="transport")
-     */
-    
 
     public function getId(): ?int
     {
@@ -119,6 +114,4 @@ class Transport
 
         return $this;
     }
-
-   
 }
