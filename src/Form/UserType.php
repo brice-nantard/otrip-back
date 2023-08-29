@@ -43,7 +43,7 @@ use App\Form\DataTransformer\StringToJsonArrayTransformer;
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
                   ))
-                  ->add('submit', SubmitType::class, ['label' => 'Envoyer', 'attr' => ['class' => 'btn btn-dark']]);
+                  ->add('Enregistrer', SubmitType::class, ['label' => 'Envoyer', 'attr' => ['class' => 'btn-primary btn-block']]);
 
                 }
 
