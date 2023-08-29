@@ -32,20 +32,6 @@ class StepController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/api/steps/trips/{id})
-     */
-    //public function getStepsFromTrip(StepRepository $stepRepository): JsonResponse
-    //{
-    //    $tripSteps = $stepRepository->findStepsFromTrip();
-
-    //    return $this->json(
-    //        $tripSteps,
-    //        200,
-    //        [],
-    //        ['groups' => 'get_collection']
-    //    );
-    //}
 
     /**
      * Route qui va nous permettre de rajouter un film à l'aide d'une requête HTTP en methode POST
