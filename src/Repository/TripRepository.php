@@ -56,8 +56,8 @@ class TripRepository extends ServiceEntityRepository
         // On créer la requete SQL qui va selectionner un film au hasard dans la base de donnée
         $sql = "SELECT *
         FROM `trip`
-        ORDER BY RAND()
-        LIMIT 1";
+        ORDER BY RAND ()
+        LIMIT 2 ";
 
      
         $conn = $this->getEntityManager()->getConnection();

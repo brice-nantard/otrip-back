@@ -17,6 +17,7 @@ class Trip
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     private $id;
 
@@ -61,7 +62,7 @@ class Trip
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="trip")
-     * @Groups({"get_collection"})
+     * 
      */
     private $steps;
 

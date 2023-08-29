@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\StepRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
@@ -19,26 +22,31 @@ class Step
 
     /**
      * @ORM\Column(type="string", length=120)
+     * @Groups({"get_collection"})
      */
     private $place;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"get_collection"})
      */
     private $start_date;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"get_collection"})
      */
     private $end_start;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"get_collection"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"get_collection"})
      */
     private $picture;
 
@@ -55,17 +63,20 @@ class Step
     /**
      * @ORM\ManyToOne(targetEntity=Accomodation::class, inversedBy="steps")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"get_collection"})
      */
     private $accomodation;
 
     /**
      * @ORM\ManyToOne(targetEntity=Transport::class, inversedBy="steps")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"get_collection"})
      */
     private $transport;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="steps")
+     * @Groups({"get_collection"})
      */
     private $trip;
 

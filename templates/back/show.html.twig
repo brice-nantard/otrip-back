@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Roles</th>
-                <td>{{ user.role.id }}</td>
+                <td>{{ user.roles|join (', ')}}</td>
             </tr>
             
         </tbody>
