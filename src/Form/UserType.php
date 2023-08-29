@@ -22,7 +22,7 @@ use App\Form\DataTransformer\StringToJsonArrayTransformer;
      public function buildForm(FormBuilderInterface $builder, array $options): void
      {
          $builder
-         ->add('pseudo', TextType::class)
+         ->add('alias', TextType::class)
              ->add('email', EmailType::class)
              ->add('roles', ChoiceType::class, [
                          
