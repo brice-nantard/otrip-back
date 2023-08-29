@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Trip;
 use App\Repository\TripRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,6 +73,35 @@ class TripController extends AbstractController
             $trip,
             201,
             [],
+            ['groups' => 'get_collection']
+        );
+    }
+
+    /**
+     * Route qui va nous permettre de modifier un voyage 
+     * 
+     * @Route("/api/trip/{id}/edit", name="api_trip_put", methods={"PUT"})
+     */
+    public function editItem(Request $request, Trip $trip = null, SerializerInterface $serializer, TripRepository $tripRepository)
+    {
+        if ($trip == null) {
+            return $this->json(
+                'Error',
+                400,
+                [''],
+                ['groups' => '']
+            );
+        }
+        // Ici on stock le json envoyé dans la requête dans $jsonContent
+        $jsonContent = $request->getContent();
+        // Ici je déserialise le json intercepté ($jsonContent) et je modfie mon entité $movie avec ce json deserialisé grace a l'option object to populate
+        // ['object_to_populate' => $movie] me permet de dire que je veux que $movie (le film courant que je veux modifier) aura les valeurs qui ont été renseignées dans la requêtte HTTP (le title, duréer, etc)
+        $serializer->deserialize($jsonContent, Trip::class, 'json', ['object_to_populate' => $trip]);
+        $tripRepository->add($trip, true);
+        return $this->json(
+            $trip,
+            200,
+            [''],
             ['groups' => 'get_collection']
         );
     }
