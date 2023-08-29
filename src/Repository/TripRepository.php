@@ -49,7 +49,7 @@ class TripRepository extends ServiceEntityRepository
         $sql = " SELECT *
         FROM `trip`
         ORDER BY RAND ()
-        LIMIT 4 ";
+        LIMIT 5 ";
 
      
         $conn = $this->getEntityManager()->getConnection();
