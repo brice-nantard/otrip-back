@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un voyage{% endblock %}
+
+{% block body %}
+
+    <h1>Ajouter un voyage</h1>
+
+    {# on inclut un "fragment de template" (bonne pratique Symfo : commence par un underscore) #}
+    {{ include('trip/_form.html.twig') }}
+
+    <div class="d-flex justify-content-start">
+    
+        <a href="{{ path('app_trip') }}">
+            <button class="btn btn-info m-2">Retour à la liste</button>
+        </a>
+    
+    </div>
+    
+{% endblock %}
