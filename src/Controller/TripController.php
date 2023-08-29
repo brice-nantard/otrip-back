@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Trip;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -62,6 +63,7 @@ class TripController extends AbstractController
             $randomTrip,
             200,
             [],
+
             ['groups' => 'get_collection']
         );
         
@@ -137,3 +139,4 @@ class TripController extends AbstractController
          return new JsonResponse(null, Response::HTTP_NO_CONTENT);
      }
 }
+

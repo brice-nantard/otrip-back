@@ -7,6 +7,7 @@ use App\Entity\Trip;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
+
 /**
  * @extends ServiceEntityRepository<Step>
  *

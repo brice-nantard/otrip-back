@@ -1,4 +1,5 @@
 {
+
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -23,6 +24,18 @@
             "config/packages/doctrine.yaml",
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -62,6 +75,7 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
+
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
@@ -112,6 +126,7 @@
             "bin/console"
         ]
     },
+
     "symfony/debug-bundle": {
         "version": "5.4",
         "recipe": {
@@ -124,7 +139,9 @@
             "config/packages/debug.yaml"
         ]
     },
+
     "symfony/flex": {
+
         "version": "1.20",
         "recipe": {
             "repo": "github.com/symfony/recipes",
@@ -155,6 +172,7 @@
             "src/Kernel.php"
         ]
     },
+
     "symfony/mailer": {
         "version": "5.4",
         "recipe": {
@@ -227,6 +245,7 @@
             "tests/bootstrap.php"
         ]
     },
+
     "symfony/routing": {
         "version": "5.4",
         "recipe": {
@@ -240,6 +259,7 @@
             "config/routes.yaml"
         ]
     },
+
     "symfony/security-bundle": {
         "version": "5.4",
         "recipe": {
@@ -265,6 +285,7 @@
             "translations/.gitignore"
         ]
     },
+
     "symfony/twig-bundle": {
         "version": "5.4",
         "recipe": {
@@ -278,6 +299,7 @@
             "templates/base.html.twig"
         ]
     },
+
     "symfony/validator": {
         "version": "5.4",
         "recipe": {
@@ -290,6 +312,7 @@
             "config/packages/validator.yaml"
         ]
     },
+
     "symfony/web-profiler-bundle": {
         "version": "5.4",
         "recipe": {
@@ -302,6 +325,7 @@
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
         ]
+
     },
     "symfony/webapp-pack": {
         "version": "1.2",
@@ -317,5 +341,6 @@
     },
     "twig/extra-bundle": {
         "version": "v3.7.0"
+
     }
 }

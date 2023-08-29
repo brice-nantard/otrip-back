@@ -20,9 +20,9 @@ class Role
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=120)
+     * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $role_name;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -35,28 +35,32 @@ class Role
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="role", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="role")
      */
-    private $users;
+    private $user;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="role_id")
+     */
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getRoleName(): ?string
     {
-        return $this->name;
+        return $this->role_name;
     }
 
-    public function setName(string $name): self
+    public function setRoleName(string $role_name): self
     {
-        $this->name = $name;
+        $this->role_name = $role_name;
 
         return $this;
     }
@@ -88,15 +92,15 @@ class Role
     /**
      * @return Collection<int, User>
      */
-    public function getUsers(): Collection
+    public function getUser(): Collection
     {
-        return $this->users;
+        return $this->user;
     }
 
     public function addUser(User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
             $user->setRole($this);
         }
 
@@ -105,7 +109,7 @@ class Role
 
     public function removeUser(User $user): self
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->user->removeElement($user)) {
             // set the owning side to null (unless already changed)
             if ($user->getRole() === $this) {
                 $user->setRole(null);
@@ -114,4 +118,5 @@ class Role
 
         return $this;
     }
-}
+    
+}       

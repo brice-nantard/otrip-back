@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
  */
@@ -40,7 +41,6 @@ class Step
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"get_collection"})
      */
     private $description;
 
@@ -80,6 +80,27 @@ class Step
      */
     private $trip;
 
+     * @ORM\ManyToOne(targetEntity=Transport::class, inversedBy="steps")
+     */
+    private $transport;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Accomodation::class, inversedBy="steps")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $accomodation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="steps")
+     */
+    private $trip;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Transport::class, inversedBy="steps")
+     * @ORM\JoinColumn(nullable=true)
+     */
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,6 +138,15 @@ class Step
     public function setEndStart(\DateTimeInterface $end_start): self
     {
         $this->end_start = $end_start;
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->end_date;
+    }
+
+    public function setEndDate(\DateTimeInterface $end_date): self
+    {
+        $this->end_date = $end_date;
 
         return $this;
     }
@@ -178,6 +208,15 @@ class Step
     {
         $this->accomodation = $accomodation;
 
+    public function getTransport(): ?Transport
+    {
+        return $this->transport;
+    }
+
+    public function setTransport(?Transport $transport): self
+    {
+        $this->transport = $transport;
+
         return $this;
     }
 
@@ -189,6 +228,15 @@ class Step
     public function setTransport(?Transport $transport): self
     {
         $this->transport = $transport;
+
+    public function getAccomodation(): ?Accomodation
+    {
+        return $this->accomodation;
+    }
+
+    public function setAccomodation(?Accomodation $accomodation): self
+    {
+        $this->accomodation = $accomodation;
 
         return $this;
     }
