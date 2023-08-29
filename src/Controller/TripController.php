@@ -31,6 +31,22 @@ class TripController extends AbstractController
         );
     }
 
+    /**
+     * 
+     * @Route("/api/trip/{id}", name="app_trip_get", methods={"GET"})
+     */
+    public function getOneTrip(TripRepository $tripRepository, $id): JsonResponse
+    {
+        $trip = $tripRepository->find($id);
+
+        return $this->json(
+            $trip,
+            200,
+            [],
+            ['groups' => 'get_collection']
+        );
+    }
+
 
     /**
       * Retourne un voyage au hasard
@@ -107,7 +123,7 @@ class TripController extends AbstractController
         );
     }
 
-    
+
     /**
      *
      * @Route("/api/trip/{id}", name="api_trip_delete", methods={"DELETE"})
