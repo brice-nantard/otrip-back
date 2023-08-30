@@ -57,6 +57,7 @@ class Trip
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
+     * @Groups({"get_collection"})
      */
     private $user;
 
