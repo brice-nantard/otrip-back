@@ -17,7 +17,7 @@ class Trip
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     * @Groups({"get_collection"})
      */
     private $id;
 
@@ -57,12 +57,14 @@ class Trip
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @Groups({"get_collection"})
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="trip")
+     * 
      * 
      */
     private $steps;

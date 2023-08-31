@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
+use App\Service\TripsManager;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -12,7 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
 
 class TripController extends AbstractController
 {
@@ -120,4 +122,33 @@ class TripController extends AbstractController
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
+
+
+    private $TripsManager;
+
+    public function __construct(TripsManager $TripsManager)
+    {
+
+        $this->TripsManager = $TripsManager;
+    }
+    
+    /**
+    * @Route("/api/users/", name="api_get_user_trips", methods ={"GET"})
+    */
+    public function showTripsUser(TripsManager $tripsManager): Response
+    {
+
+        $user = $this->getUser();
+
+            $trips = $tripsManager -> getTripsForUser($user);
+
+            return $this->json(
+                ['trips' => $trips],
+                200,
+                [''],
+                ['groups' => 'get_collection']
+            );
+       
+    }
 }
+
