@@ -3,6 +3,8 @@
 namespace App\Service;
 use App\Entity\Trip;
 use App\Entity\User;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -25,4 +27,13 @@ class TripsManager
         return $trips;
     }
 
+    public function createTrip(Trip $trip, User $user)
+    {
+        $trip->setCreatedAt(new DateTimeImmutable());
+        $trip->setUser($user);
+        $this->entityManager->persist($trip);
+        $this->entityManager->flush();
+
+        return $trip;
+    }
 }
