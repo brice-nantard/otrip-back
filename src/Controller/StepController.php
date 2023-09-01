@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 class StepController extends AbstractController
@@ -38,29 +39,27 @@ class StepController extends AbstractController
     /**
      * Route qui va nous permettre de rajouter un film à l'aide d'une requête HTTP en methode POST
      * 
-     * @Route("/api/trip/step/add", name="api_step_post", methods={"POST"})
+     * @Route("/api/trip/{id}/step/add", name="api_step_post", methods={"POST"})
      */
-    public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry)
+    public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry, TripsManager $tripsManager, StepsManager $stepsManager, int $id, Trip $trip)
     {
-        // Ici on récupère le contenu JSON de la requête
         $jsonContent = $request->getContent();
 
-        // Ici on déserialise (convertit) le JSON intercépté en objet PHP donc => en entité Movie
+        $trip = $tripsManager->getById($id);      
+        
         $step = $serializer->deserialize($jsonContent, Step::class, 'json');
-        // Maintenant $movie c'est une entité Movie et on va la sauvegarder dans la bdd
-        $entityManager = $managerRegistry->getManager();
-        $entityManager->persist($step);
-        $entityManager->flush();
-        // Et la on a envoyé $movie (qui de base est ce qu'on a intercepté de l'api)
 
-        //On retourne la réponse adapté (le code attendu quand un post a bien fonctionné c'est le code 201)
+        $step = $stepsManager->createStep($step, $trip);
+        
         return $this->json(
-            $step,
+            ['step' => $step],
             201,
             [],
             ['groups' => 'get_collection']
         );
     }
+
+
 
     private $stepsManager;
 
@@ -73,13 +72,11 @@ class StepController extends AbstractController
     /**
     * @Route("/api/trip/{id}/steps", name="api_get_trip_steps", methods ={"GET"})
     */
-    public function showStepsTrip(StepsManager $stepsManager, Step $step, TripsManager $tripsManager, $id): Response
+    public function showStepsTrip(StepsManager $stepsManager, TripsManager $tripsManager, $id): Response
     {
-        $user = $this->getUser();
 
-        $trips = $tripsManager -> getTripsForUser($user);
-
-        $trip = $step->getTrip();
+        //$trips = $tripsManager -> getTripsForUser($user);
+        $trip = $tripsManager->getById($id);
 
             $steps = $stepsManager->getStepsForTrip($trip);
 
