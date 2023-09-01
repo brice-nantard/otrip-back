@@ -57,19 +57,15 @@ class TripController extends AbstractController
      *
      * @Route("/api/trip/add", name="api_trips_post", methods={"POST"})
      */
-    public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry)
+    public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry, TripsManager $tripsManager)
     {
 
         $jsonContent = $request->getContent();
-
+        $user = $this->getUser();
 
         $trip = $serializer->deserialize($jsonContent, Trip::class, 'json');
 
-        $entityManager = $managerRegistry->getManager();
-        $entityManager->persist($trip);
-        $entityManager->flush();
-
-
+        $trip = $tripsManager->createTrip($trip, $user);
 
         return $this->json(
             $trip,
@@ -115,7 +111,7 @@ class TripController extends AbstractController
      * @Route("/api/trip/{id}", name="api_movies_put", methods={"DELETE"})
      */
 
-    public function deleteItem(Trip $trip, EntityManagerInterface $em): JsonResponse
+    public function deleteItem(Trip $trip, EntityManagerInterface $em, $id): JsonResponse
     {
         $em->remove($trip);
         $em->flush();
@@ -147,8 +143,7 @@ class TripController extends AbstractController
                 200,
                 [''],
                 ['groups' => 'get_collection']
-            );
-       
+            );   
     }
 }
 
