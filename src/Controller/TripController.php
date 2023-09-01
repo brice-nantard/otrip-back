@@ -3,18 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
-use App\Service\TripsManager;
+use App\Service\TripManager;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\VarDumper\Cloner\VarCloner;
-use Symfony\Component\VarDumper\Dumper\CliDumper;
 
 class TripController extends AbstractController
 {
@@ -124,23 +124,23 @@ class TripController extends AbstractController
     }
 
 
-    private $TripsManager;
+    private $TripManager;
 
-    public function __construct(TripsManager $TripsManager)
+    public function __construct(TripManager $TripManager)
     {
 
-        $this->TripsManager = $TripsManager;
+        $this->TripManager = $TripManager;
     }
     
     /**
     * @Route("/api/users/", name="api_get_user_trips", methods ={"GET"})
     */
-    public function showTripsUser(TripsManager $tripsManager): Response
+    public function showTripsUser(TripManager $tripManager): Response
     {
 
         $user = $this->getUser();
 
-            $trips = $tripsManager -> getTripsForUser($user);
+            $trips = $tripManager -> getTripsForUser($user);
 
             return $this->json(
                 ['trips' => $trips],
