@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Service;
+
 use App\Entity\Trip;
 use App\Entity\User;
 use DateTime;
