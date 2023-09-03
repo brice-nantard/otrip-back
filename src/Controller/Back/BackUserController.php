@@ -1,7 +1,7 @@
 <?php
 
 
- namespace App\Controller;
+ namespace App\Back\Controller;
 
  use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  use App\Form\UserType;
@@ -13,7 +13,7 @@
  use Symfony\Component\Routing\Annotation\Route;
  use App\Repository\UserRepository;
 
- class UserController extends AbstractController
+ class BackUserController extends AbstractController
  {
      /**
       * Homepage
