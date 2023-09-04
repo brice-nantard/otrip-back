@@ -53,6 +53,7 @@ security:
 
             - { path: ^/back, roles: ROLE_ADMIN }
             - { path: ^/api/login, roles: PUBLIC_ACCESS }
+            - { path: ^/, roles: PUBLIC_ACCESS}       
             - { path: ^/api,       roles: IS_AUTHENTICATED}
 
     role_hierarchy:
