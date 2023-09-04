@@ -4,10 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Step;
 use App\Entity\Trip;
+use App\Entity\Transport;
+use App\Entity\Accomodation;
 use App\Service\StepsManager;
+use App\Service\TripsManager;
 use App\Repository\StepRepository;
 use App\Repository\TripRepository;
-use App\Service\TripsManager;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,33 +45,88 @@ class StepController extends AbstractController
      * 
      * @Route("/api/trip/{id}/step/add", name="api_step_post", methods={"POST"})
      */
-    public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry, TripsManager $tripsManager, StepsManager $stepsManager, int $id, Trip $trip)
-    {
-        $jsonContent = $request->getContent();
-
-        $trip = $tripsManager->getById($id);      
+    //public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry, TripsManager $tripsManager, StepsManager //$stepsManager, int $id)
+    //{
         
-        $step = $serializer->deserialize($jsonContent, Step::class, 'json');
+    //    $jsonContent = $request->getContent();
 
-        $step = $stepsManager->createStep($step, $trip);
+    //    $trip = $tripsManager->getById($id);      
         
-        return $this->json(
-            ['step' => $step],
-            201,
-            [],
-            ['groups' => 'get_collection']
-        );
-    }
+    //    $step = $serializer->deserialize($jsonContent, Step::class, 'json');
 
+    //    $step->setTrip($trip);
 
+    //    $stepsManager->createStep($step);
+        
+    //    return $this->json(
+    //        ['step' => $step],
+    //        201,
+    //        [],
+    //        ['groups' => 'get_collection']
+    //    );
+    //}
 
     private $stepsManager;
+    private $entityManager;
 
-    public function __construct(StepsManager $stepsManager)
+    public function __construct(StepsManager $stepsManager, EntityManagerInterface $entityManager)
     {
 
         $this->stepsManager = $stepsManager;
+        $this->entityManager = $entityManager;
     }
+
+/**
+ * Route qui va nous permettre de rajouter un film à l'aide d'une requête HTTP en methode POST
+ * 
+ * @Route("/api/trip/{id}/step/add", name="api_step_post", methods={"POST"})
+ */
+public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry, TripsManager $tripsManager, StepsManager $stepsManager, int $id, EntityManagerInterface $entityManager): JsonResponse
+{
+    $jsonContent = $request->getContent();
+
+    $trip = $tripsManager->getById($id);
+
+    // Désérialisez les données JSON en une instance d'Étape
+    $step = $serializer->deserialize($jsonContent, Step::class, 'json');
+
+    // Récupérez les ID de l'accommodation et du transport à partir des données JSON
+    $data = json_decode($jsonContent, true);
+    $accomodationId = $data['accomodation']['id'];
+    $transportId = $data['transport']['id'];
+
+    // Récupérez les entités Accomodation et Transport à partir de la base de données
+    $accomodation = $entityManager->getRepository(Accomodation::class)->find($accomodationId);
+    $transport = $entityManager->getRepository(Transport::class)->find($transportId);
+
+    // Assurez-vous que l'accommodation et le transport sont associés à l'étape et au voyage corrects
+    $step->setAccomodation($accomodation);
+    $step->setTransport($transport);
+    $step->setTrip($trip);
+
+    // Enregistrez l'étape dans la base de données
+    $stepsManager->createStep($step);
+
+    return $this->json(
+        ['step' => $step],
+        201,
+        [],
+        ['groups' => 'get_collection']
+    );
+}
+
+
+
+
+    //private $stepsManager;
+    //private $entityManager;
+
+    //public function __construct(StepsManager $stepsManager, EntityManager $entityManager)
+    //{
+
+    //    $this->stepsManager = $stepsManager;
+    //    $this->entityManager = $entityManager;
+    //}
 
     /**
     * @Route("/api/trip/{id}/steps", name="api_get_trip_steps", methods ={"GET"})
