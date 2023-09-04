@@ -113,10 +113,7 @@ class TripController extends AbstractController
 
     public function deleteItem(Trip $trip, EntityManagerInterface $em, $id): JsonResponse
     {
-        function verify($id){
-            echo $id;
-            die();
-             }
+        
         $em->remove($trip);
         $em->flush();
 

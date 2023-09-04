@@ -106,8 +106,21 @@ class StepController extends AbstractController
                 [''],
                 ['groups' => 'get_collection']
             );
-       
     }
+
+    /**
+     *
+     * @Route("/api/step/{id}", name="api_step_delete", methods={"DELETE"})
+     */
+
+     public function deleteItem(Step $step, EntityManagerInterface $em, $id): JsonResponse
+     {
+         $em->remove($step);
+         $em->flush();
+ 
+         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+     }
+ 
 }
 
 
