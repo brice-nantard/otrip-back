@@ -4,10 +4,9 @@ namespace App\Service;
 
 use App\Entity\Trip;
 use App\Entity\User;
-use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 
 class TripManager
