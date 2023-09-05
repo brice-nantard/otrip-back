@@ -88,6 +88,56 @@ class StepController extends AbstractController
         );
 }
 
+    /**
+     *
+     * @Route("/api/step/{id}", name="api_step_put", methods={"PUT"})
+     */
+    public function editItem(Request $request, Step $step = null, SerializerInterface $serializer, StepRepository $stepRepository, EntityManagerInterface $entityManager, int $id, TripsManager $tripsManager)
+    {
+
+        if ($step == null) {
+            return $this->json(
+                'Erreur => Etape non trouvée',
+                400,
+                [''],
+                ['groups' => '']
+            );
+        }
+
+        $jsonContent = $request->getContent();
+
+        $originalTripId = $step->getTrip()->getId();
+
+        //$trip = $tripsManager->getById($id);
+
+
+        $serializer->deserialize($jsonContent, Step::class, 'json', ['object_to_populate' => $step]);
+
+        $data = json_decode($jsonContent, true);
+        $accomodationId = $data['accomodation']['id'];
+        $transportId = $data['transport']['id'];
+        //$tripId = $data['trip']['id'];
+
+        $accomodation = $entityManager->getRepository(Accomodation::class)->find($accomodationId);
+        $transport = $entityManager->getRepository(Transport::class)->find($transportId);
+        //$trip = $entityManager->getRepository(Trip::class)->find($tripId);
+
+        $step->setAccomodation($accomodation);
+        $step->setTransport($transport);
+
+        $trip = $tripsManager->getById($originalTripId);
+        $step->setTrip($trip);
+
+        $stepRepository->add($step, true);
+
+        return $this->json(
+            $step,
+            200,
+            [''],
+            ['groups' => 'get_collection']
+        );
+    }
+
 
     /**
     * @Route("/api/trip/{id}/steps", name="api_get_trip_steps", methods ={"GET"})

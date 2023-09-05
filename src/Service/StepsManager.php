@@ -36,7 +36,7 @@ class StepsManager
         $trip = $step->getTrip();
         $accomodation = $step->getAccomodation();
         $transport = $step->getTransport();
-        
+
         $step->setCreatedAt(new DateTimeImmutable());
         //$step->setTrip($trip);
         $this->entityManager->persist($step);
@@ -53,6 +53,8 @@ class StepsManager
 
         return $step;
     }
+
+    
 
     
 }
