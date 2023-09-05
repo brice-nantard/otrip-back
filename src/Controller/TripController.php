@@ -84,23 +84,23 @@ class TripController extends AbstractController
     public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry, TripManager $tripManager)
     {
 
-    $jsonContent = $request->getContent();
-    $user = $this->getUser();
+        $jsonContent = $request->getContent();
+        $user = $this->getUser();
 
-    $trip = $serializer->deserialize($jsonContent, Trip::class, 'json');
+        $trip = $serializer->deserialize($jsonContent, Trip::class, 'json');
 
-    $trip = $tripManager->createTrip($trip, $user);
+        $trip = $tripManager->createTrip($trip, $user);
 
-    return $this->json(
-        $trip,
-        201,
-        [],
-        ['groups' => 'get_collection']
-    );
+        return $this->json(
+            $trip,
+            201,
+            [],
+            ['groups' => 'get_collection']
+        );
     }
 
  
-    
+
 
     /**
      *
