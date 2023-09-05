@@ -21,7 +21,7 @@ class TripManager
     public function getTripsForUser(User $user)
     {
         $tripRepository = $this->entityManager->getRepository(Trip::class);
-        
+
         $trips = $tripRepository->findBy(['user' => $user]);
 
         return $trips;
@@ -36,4 +36,14 @@ class TripManager
 
         return $trip;
     }
+
+    public function getById(int $id)
+    {
+        $tripRepository = $this->entityManager->getRepository(Trip::class);
+
+        $trip = $tripRepository->find($id);
+
+        return $trip;
+    }
 }
+    

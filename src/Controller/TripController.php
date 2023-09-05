@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
+use App\Service\StepManager;
 use App\Service\TripManager;
+use App\Repository\StepRepository;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,6 +34,32 @@ class TripController extends AbstractController
             ['groups' => 'get_collection']
         );
     }
+
+    /**
+     * @Route ("/api/trip/{id}", name="api_trip_show", requirements={"id"="\d+"}, methods={"GET"})
+     */
+
+     public function showOneTrip($id, TripRepository $tripRepository, StepRepository $stepRepository, StepManager $stepManager)
+     {
+
+        $trip = $tripRepository->find(($id));
+        $steps = $stepManager->getStepsForTrip($trip);
+
+        if ($trip === null) {
+
+        throw $this->createNotFoundException('Voyage non trouvé. ');
+
+        //$step = $stepRepository->METHODESUSERVICESTEPS($trip)
+        }
+
+        return $this->json(
+            [$trip, $steps],
+            200,
+            [],
+            ['groups' => 'get_collection']);
+        }
+
+
     /**
       *
       * @Route("/api/trips/random", name="api_trips_get_item_random", methods={"GET"})
@@ -48,8 +76,6 @@ class TripController extends AbstractController
             [],
             ['groups' => '']
         );
-
-
     }
 
     /**
@@ -102,7 +128,6 @@ class TripController extends AbstractController
             [''],
             ['groups' => 'get_collection']
         );
-
     }
 
     /**
@@ -110,8 +135,9 @@ class TripController extends AbstractController
      * @Route("/api/trip/{id}", name="api_movies_put", methods={"DELETE"})
      */
 
-    public function deleteItem(Trip $trip, EntityManagerInterface $em): JsonResponse
+    public function deleteItem(Trip $trip, EntityManagerInterface $em, $id): JsonResponse
     {
+        
         $em->remove($trip);
         $em->flush();
 
@@ -142,8 +168,7 @@ class TripController extends AbstractController
                 200,
                 [''],
                 ['groups' => 'get_collection']
-            );
-       
+            );   
     }
 }
 

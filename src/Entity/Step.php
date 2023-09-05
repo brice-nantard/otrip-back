@@ -61,14 +61,14 @@ class Step
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Accomodation::class, inversedBy="steps")
+     * @ORM\ManyToOne(targetEntity=Accomodation::class, inversedBy="steps", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"get_collection"})
      */
     private $accomodation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Transport::class, inversedBy="steps")
+     * @ORM\ManyToOne(targetEntity=Transport::class, inversedBy="steps", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"get_collection"})
      */
@@ -76,7 +76,6 @@ class Step
 
     /**
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="steps")
-     * @Groups({"get_collection"})
      */
     private $trip;
 
