@@ -6,8 +6,8 @@ use App\Entity\Step;
 use App\Entity\Trip;
 use App\Entity\Transport;
 use App\Entity\Accomodation;
-use App\Service\StepsManager;
-use App\Service\TripsManager;
+use App\Service\StepManager;
+use App\Service\TripManager;
 use App\Repository\StepRepository;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManager;
@@ -39,13 +39,13 @@ class StepController extends AbstractController
         );
     }
 
-    private $stepsManager;
+    private $stepManager;
     private $entityManager;
 
-    public function __construct(StepsManager $stepsManager, EntityManagerInterface $entityManager)
+    public function __construct(StepManager $stepManager, EntityManagerInterface $entityManager)
     {
 
-        $this->stepsManager = $stepsManager;
+        $this->stepManager = $stepManager;
         $this->entityManager = $entityManager;
     }
 
@@ -53,11 +53,11 @@ class StepController extends AbstractController
      * 
      * @Route("/api/trip/{id}/step/add", name="api_step_post", methods={"POST"})
      */
-    public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry, TripsManager $tripsManager, StepsManager    $stepsManager, int $id, EntityManagerInterface $entityManager): JsonResponse
+    public function createItem(Request $request, SerializerInterface $serializer, ManagerRegistry $managerRegistry, TripManager $tripManager, StepManager    $stepManager, int $id, EntityManagerInterface $entityManager): JsonResponse
     {
         $jsonContent = $request->getContent();
 
-        $trip = $tripsManager->getById($id);
+        $trip = $tripManager->getById($id);
 
         // Désérialisez les données JSON en une instance d'Étape
         $step = $serializer->deserialize($jsonContent, Step::class, 'json');
@@ -77,7 +77,7 @@ class StepController extends AbstractController
         $step->setTrip($trip);
 
         // Enregistrez l'étape dans la base de données
-        $stepsManager->createStep($step);
+        $stepManager->createStep($step);
 
         return $this->json(
             ['step' => $step],
@@ -91,7 +91,7 @@ class StepController extends AbstractController
      *
      * @Route("/api/step/{id}", name="api_step_put", methods={"PUT"})
      */
-    public function editItem(Request $request, Step $step = null, SerializerInterface $serializer, StepRepository $stepRepository, EntityManagerInterface $entityManager, int $id, TripsManager $tripsManager)
+    public function editItem(Request $request, Step $step = null, SerializerInterface $serializer, StepRepository $stepRepository, EntityManagerInterface $entityManager, int $id, TripManager $tripManager)
     {
 
         if ($step == null) {
@@ -119,7 +119,7 @@ class StepController extends AbstractController
         $step->setAccomodation($accomodation);
         $step->setTransport($transport);
 
-        $trip = $tripsManager->getById($originalTripId);
+        $trip = $tripManager->getById($originalTripId);
         $step->setTrip($trip);
 
         $stepRepository->add($step, true);
@@ -135,13 +135,13 @@ class StepController extends AbstractController
     /**
     * @Route("/api/trip/{id}/steps", name="api_get_trip_steps", methods ={"GET"})
     */
-    public function showStepsTrip(StepsManager $stepsManager, TripsManager $tripsManager, $id): Response
+    public function showStepsTrip(StepManager $stepManager, TripManager $tripManager, $id): Response
     {
 
         //$trips = $tripsManager -> getTripsForUser($user);
-        $trip = $tripsManager->getById($id);
+        $trip = $tripManager->getById($id);
 
-            $steps = $stepsManager->getStepsForTrip($trip);
+            $steps = $stepManager->getStepsForTrip($trip);
 
             return $this->json(
                 ['steps' => $steps],

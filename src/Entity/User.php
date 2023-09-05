@@ -32,8 +32,6 @@ class User   implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="user")
-     * @ORM\JoinColumn(nullable=false)
      * @ORM\Column(type="json")
      */
     private $roles = [];

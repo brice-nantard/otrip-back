@@ -51,10 +51,11 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
 
-          #  - { path: ^/back, roles: ROLE_ADMIN }
-            - { path: ^/, roles: PUBLIC_ACCESS}
+            - { path: ^/back, roles: ROLE_ADMIN }
             - { path: ^/api/login, roles: PUBLIC_ACCESS }
-            - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+            - { path: ^/, roles: PUBLIC_ACCESS}       
+
+            - { path: ^/api,       roles: IS_AUTHENTICATED}
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
