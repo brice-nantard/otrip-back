@@ -75,7 +75,7 @@ class UserController extends AbstractController
          $entityManager = $doctrine->getManager();
         
          $entityManager->remove($user);
-        var_dump($user);
+         //var_dump($user);
          $entityManager->flush();
          return $this->redirectToRoute('app_back_users');
      }

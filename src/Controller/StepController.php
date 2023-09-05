@@ -50,7 +50,6 @@ class StepController extends AbstractController
     }
 
     /**
-     * Route qui va nous permettre de rajouter un film à l'aide d'une requête HTTP en methode POST
      * 
      * @Route("/api/trip/{id}/step/add", name="api_step_post", methods={"POST"})
      */
@@ -108,20 +107,15 @@ class StepController extends AbstractController
 
         $originalTripId = $step->getTrip()->getId();
 
-        //$trip = $tripsManager->getById($id);
-
-
         $serializer->deserialize($jsonContent, Step::class, 'json', ['object_to_populate' => $step]);
 
         $data = json_decode($jsonContent, true);
         $accomodationId = $data['accomodation']['id'];
         $transportId = $data['transport']['id'];
-        //$tripId = $data['trip']['id'];
 
         $accomodation = $entityManager->getRepository(Accomodation::class)->find($accomodationId);
         $transport = $entityManager->getRepository(Transport::class)->find($transportId);
-        //$trip = $entityManager->getRepository(Trip::class)->find($tripId);
-
+        
         $step->setAccomodation($accomodation);
         $step->setTransport($transport);
 
@@ -137,7 +131,6 @@ class StepController extends AbstractController
             ['groups' => 'get_collection']
         );
     }
-
 
     /**
     * @Route("/api/trip/{id}/steps", name="api_get_trip_steps", methods ={"GET"})
@@ -170,7 +163,6 @@ class StepController extends AbstractController
  
          return new JsonResponse(null, Response::HTTP_NO_CONTENT);
      }
- 
 }
 
 
